@@ -1,5 +1,5 @@
 /**************DO NOT MODIFY THIS LINE BELOW*****************/
-const fruits = require('../fruit-data')
+const fruits = require('../fruit-data');
 
 /* 07. `addKeyAndValueToAll()` - Return the fruits array, adding the given key and
 value to each fruit object
@@ -8,9 +8,14 @@ console.log(addKeyAndValueToAll(fruits, "inStock", true));
 // returns array of 31 fruits, and each fruit object includes "inStock: true"
 */
 
+//WORKS
 function addKeyAndValueToAll(array, key, value) {
-    // Your code here 
+  array.forEach((fruit) => {
+    fruit[key] = value;
+  });
+  return array;
 }
+// console.log(addKeyAndValueToAll(fruits, 'inStock', true)); //WORKS ----
 
 /* 08. `addKeyAndValueToOne()` - Return object at the given index array, adding the given key and
 value to that fruit object
@@ -19,9 +24,21 @@ console.log(addKeyAndValueToOne(fruits, "color", "red", 1));
 // returns first object ("Apple"), including "color: red"
 */
 
+//WORKS
 function addKeyAndValueToOne(array, key, value, index) {
-    // Your code here 
+  let selected;
+  array.map((el, idx) => {
+    // console.log('EL ', el, '+ INDEX', idx);
+    if (idx === index) {
+      el[key] = value;
+      selected = el;
+    }
+  });
+  return selected;
 }
+
+// console.log(addKeyAndValueToOne(fruits, 'color', 'red', 0)); WORKS ----
+// returns first object ("Apple"), including "color: red"
 
 /* 09. `updateKeyName()` - Change the old key name to the new key name in all
 objects, and return the resulting array.
@@ -30,10 +47,16 @@ HINT: Can you make a copy of the old key and value, and then delete the original
 console.log(updateKeyName(fruits, "nutritions", "nutrition"));
 // returns fruits array, but every "nutritions" key had changed to "nutrition"
 */
-
+// WORKS --- *RUNNING INTO TEST ISSUE WITH 3RD PARAMETER*
 function updateKeyName(array, oldKey, newKey) {
-    // Your code here 
+  array.forEach((fruit) => {
+    fruit[newKey] = fruit[oldKey];
+    delete fruit[oldKey];
+  });
+  return array;
 }
+// console.log(updateKeyName(fruits, 'nutritions', 'nutrition')); WORKS --- *RUNNING INTO TEST ISSUE WITH 3RD PARAMETER*
+// returns fruits array, but every "nutritions" key had changed to "nutrition"
 
 /* 10. `updateIdValues()` - Change all of the "id" values to six-character
 strings, and return an array of all of the new id values.
@@ -47,10 +70,14 @@ console.log(updateIdValues(fruits));
     '000070', '000004', '000052', '000010', '000071', '000023', '000003',
     '000005', '000073', '000025' ];
 */
-
+//working on this one switching to practice assessment 9/15 8:50pm
+// iterate through the array and add a 0 until the length is equal to 6
 function updateIdValues(array) {
-    // Your code here 
+  array.forEach((fruit, el) => {
+    console.log(fruit, el);
+  });
 }
+console.log(updateIdValues(fruits));
 
 /* 11. `deleteKeysandValues()` - Delete the keyToDelete from the nutritions
 object from every fruit, and return the array.
@@ -59,10 +86,14 @@ console.log(deleteKeysAndValues(fruits, "sugar"));
 // returns fruits array, but every "nutritions" key no longer has a "sugar" key
 */
 
-function deleteKeysAndValues(array, keyToDelete) {
-    // Your code here 
-}
+function deleteKeysAndValues(array, keyToDelete) {}
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 
-module.exports = [ addKeyAndValueToAll, addKeyAndValueToOne, updateKeyName, updateIdValues, deleteKeysAndValues ];
+module.exports = [
+  addKeyAndValueToAll,
+  addKeyAndValueToOne,
+  updateKeyName,
+  updateIdValues,
+  deleteKeysAndValues,
+];
